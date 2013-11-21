@@ -1,12 +1,9 @@
-package jUnit;
-
+import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
+import edu.berkeley.path.beats.jaxb.RouteSet;
 import edu.berkeley.path.beats.simulator.DemandSet;
 import edu.berkeley.path.beats.simulator.Link;
 import edu.berkeley.path.beats.simulator.ObjectFactory;
 import edu.berkeley.path.beats.simulator.Scenario;
-import edu.berkeley.path.beats.jaxb.Demand;
-import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
-import edu.berkeley.path.beats.jaxb.RouteSet;
 
 public class BeATS_test {
 	
@@ -15,7 +12,7 @@ public class BeATS_test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String configfilename = "/Users/Samitha/Documents/github/DTA-PC/graphs/Rerouting_sent_newxsd_v2.xml";
+		String configfilename = "/Users/torresl/LRTORRES/dtapc/graphs/Rerouting_sent_newxsd_v2.xml";
 			Scenario scenario;
 			try {
 				scenario = ObjectFactory.createAndLoadScenario(configfilename);
