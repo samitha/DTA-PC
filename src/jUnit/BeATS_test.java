@@ -1,15 +1,14 @@
 package jUnit;
 
-import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
-import edu.berkeley.path.beats.jaxb.RouteSet;
 import edu.berkeley.path.beats.simulator.DemandSet;
 import edu.berkeley.path.beats.simulator.Link;
 import edu.berkeley.path.beats.simulator.ObjectFactory;
 import edu.berkeley.path.beats.simulator.Scenario;
+import edu.berkeley.path.beats.jaxb.Demand;
+import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
+import edu.berkeley.path.beats.jaxb.RouteSet;
 
 public class BeATS_test {
-
-
 	
 	/**
 	 * @param args
