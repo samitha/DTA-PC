@@ -1,3 +1,5 @@
+package dtapc;
+
 import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
 import edu.berkeley.path.beats.jaxb.RouteSet;
 import edu.berkeley.path.beats.simulator.DemandSet;
@@ -12,7 +14,7 @@ public class BeATS_test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String configfilename = "/Users/torresl/LRTORRES/dtapc/graphs/Rerouting_sent_newxsd_v2.xml";
+		String configfilename = "/Users/samitha/Documents/github/DTA-PC-PATH/graphs/Rerouting_sent_newxsd_v2.xml";
 			Scenario scenario;
 			try {
 				scenario = ObjectFactory.createAndLoadScenario(configfilename);
