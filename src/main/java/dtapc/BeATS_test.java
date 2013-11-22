@@ -1,10 +1,3 @@
-<<<<<<< HEAD:src/main/java/dtapc/BeATS_test.java
-import edu.berkeley.path.beats.jaxb.FundamentalDiagramSet;
-import edu.berkeley.path.beats.jaxb.RouteSet;
-=======
-package jUnit;
-
->>>>>>> 20ff807c487a476d660107807ac1b233b9009c4b:src/jUnit/BeATS_test.java
 import edu.berkeley.path.beats.simulator.DemandSet;
 import edu.berkeley.path.beats.simulator.Link;
 import edu.berkeley.path.beats.simulator.ObjectFactory;
