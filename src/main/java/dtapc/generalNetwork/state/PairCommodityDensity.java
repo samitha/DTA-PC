@@ -1,4 +1,4 @@
-package generalNetwork.state;
+package dtapc.generalNetwork.state;
 
 public class PairCommodityDensity {
 

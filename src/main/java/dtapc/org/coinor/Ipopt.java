@@ -30,7 +30,7 @@
  * 2007-11-11
  */
 
-package org.coinor;
+package dtapc.org.coinor;
 
 import java.io.File;
 

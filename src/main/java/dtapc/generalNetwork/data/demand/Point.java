@@ -1,4 +1,4 @@
-package generalNetwork.data.demand;
+package dtapc.generalNetwork.data.demand;
 
 /**
  * @class Point

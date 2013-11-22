@@ -1,12 +1,12 @@
-package generalNetwork.state.externalSplitRatios;
+package dtapc.generalNetwork.state.externalSplitRatios;
 
-import generalLWRNetwork.Origin;
+import dtapc.generalLWRNetwork.Origin;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import dataStructures.HashMapIntegerDouble;
+import dtapc.dataStructures.HashMapIntegerDouble;
 
 /**
  * @brief Describe the split ratios at an origin

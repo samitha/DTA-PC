@@ -1,12 +1,12 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
-import generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.Profile;
 
 import java.awt.Color;
 
 import javax.swing.JFrame;
 
-import dta_solver.Simulator;
+import dtapc.dta_solver.Simulator;
 
 public class DisplayGUI extends JFrame {
 

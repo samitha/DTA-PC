@@ -1,6 +1,6 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
-import generalNetwork.graph.json.JsonFactory;
+import dtapc.generalNetwork.graph.json.JsonFactory;
 
 import java.awt.Color;
 import java.awt.Graphics;

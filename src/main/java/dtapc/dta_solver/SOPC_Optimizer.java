@@ -1,25 +1,25 @@
-package dta_solver;
+package dtapc.dta_solver;
 
 import java.util.Iterator;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Destination;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.Origin;
-import generalNetwork.state.CellInfo;
-import generalNetwork.state.JunctionInfo;
-import generalNetwork.state.State;
-import generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
-import generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
-import generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Destination;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.state.CellInfo;
+import dtapc.generalNetwork.state.JunctionInfo;
+import dtapc.generalNetwork.state.State;
+import dtapc.generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
 import cern.colt.matrix.tdouble.DoubleMatrix1D;
 import cern.colt.matrix.tdouble.DoubleFactory1D;
 import cern.colt.matrix.tdouble.algo.DenseDoubleAlgebra;
 import cern.colt.matrix.tdouble.impl.DenseDoubleMatrix1D;
 import cern.colt.matrix.tdouble.impl.SparseCCDoubleMatrix2D;
-import dataStructures.Numerical;
-import dataStructures.Preprocessor;
-import dta_solver.adjointMethod.GradientDescentOptimizer;
+import dtapc.dataStructures.Numerical;
+import dtapc.dataStructures.Preprocessor;
+import dtapc.dta_solver.adjointMethod.GradientDescentOptimizer;
 
 public class SOPC_Optimizer implements GradientDescentOptimizer {
 

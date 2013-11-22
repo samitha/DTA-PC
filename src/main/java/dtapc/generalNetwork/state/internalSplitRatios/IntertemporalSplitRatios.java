@@ -1,12 +1,12 @@
-package generalNetwork.state.internalSplitRatios;
+package dtapc.generalNetwork.state.internalSplitRatios;
 
 import java.util.HashMap;
 
-import generalLWRNetwork.DiscretizedGraph;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.Origin;
-import generalNetwork.data.JsonJunctionSplitRatios;
-import generalNetwork.data.JsonSplitRatios;
+import dtapc.generalLWRNetwork.DiscretizedGraph;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.data.JsonJunctionSplitRatios;
+import dtapc.generalNetwork.data.JsonSplitRatios;
 
 /**
  * @brief Contains all the split ratios for all commodities at each junction for

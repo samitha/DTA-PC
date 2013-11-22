@@ -1,6 +1,6 @@
-package dta_solver.adjointMethod;
+package dtapc.dta_solver.adjointMethod;
 
-import org.coinor.Ipopt;
+import dtapc.org.coinor.Ipopt;
 
 /**
  * @brief This is a general optimization of a multi variables function objective

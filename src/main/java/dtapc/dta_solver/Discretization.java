@@ -1,4 +1,4 @@
-package dta_solver;
+package dtapc.dta_solver;
 
 /**
  * @brief Used now to save time discretization (delta t) and number of time

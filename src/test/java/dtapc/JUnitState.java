@@ -1,6 +1,6 @@
-package jUnit;
+package dtapc;
 
-import dta_solver.adjointMethod.JavaSystemState;
+import dtapc.dta_solver.adjointMethod.JavaSystemState;
 
 public class JUnitState implements JavaSystemState {
 

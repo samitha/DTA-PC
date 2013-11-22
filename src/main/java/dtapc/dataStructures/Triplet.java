@@ -1,4 +1,4 @@
-package dataStructures;
+package dtapc.dataStructures;
 
 /**
  * @brief Tuple composed of the id of an incoming-link, outgoing-link and a

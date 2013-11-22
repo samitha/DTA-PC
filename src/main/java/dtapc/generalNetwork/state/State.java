@@ -1,7 +1,7 @@
-package generalNetwork.state;
+package dtapc.generalNetwork.state;
 
-import dta_solver.adjointMethod.JavaSystemState;
-import generalNetwork.state.Profile;
+import dtapc.dta_solver.adjointMethod.JavaSystemState;
+import dtapc.generalNetwork.state.Profile;
 
 /**
  * @package generalNetwork.state

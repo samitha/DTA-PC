@@ -1,6 +1,6 @@
-package generalNetwork.graph.json;
+package dtapc.generalNetwork.graph.json;
 
-import generalNetwork.graph.Node;
+import dtapc.generalNetwork.graph.Node;
 
 import java.lang.reflect.Type;
 

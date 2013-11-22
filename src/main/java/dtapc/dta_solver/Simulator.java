@@ -1,22 +1,22 @@
-package dta_solver;
+package dtapc.dta_solver;
 
-import io.InputOutput;
+import dtapc.io.InputOutput;
 
 import java.util.Iterator;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Destination;
-import generalLWRNetwork.DiscretizedGraph;
-import generalLWRNetwork.LWR_network;
-import generalLWRNetwork.Origin;
-import generalNetwork.data.Json_data;
-import generalNetwork.data.demand.Demands;
-import generalNetwork.data.demand.DemandsFactory;
-import generalNetwork.graph.Graph;
-import generalNetwork.graph.json.JsonFactory;
-import generalNetwork.state.Profile;
-import generalNetwork.state.State;
-import generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Destination;
+import dtapc.generalLWRNetwork.DiscretizedGraph;
+import dtapc.generalLWRNetwork.LWR_network;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.data.Json_data;
+import dtapc.generalNetwork.data.demand.Demands;
+import dtapc.generalNetwork.data.demand.DemandsFactory;
+import dtapc.generalNetwork.graph.Graph;
+import dtapc.generalNetwork.graph.json.JsonFactory;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.State;
+import dtapc.generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
 
 /**
  * @package dta_solver

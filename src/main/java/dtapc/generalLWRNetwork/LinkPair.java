@@ -1,4 +1,4 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
 /**
  * @brief Contains the first/last cell of a discretized link

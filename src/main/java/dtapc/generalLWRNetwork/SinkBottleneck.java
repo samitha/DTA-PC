@@ -1,4 +1,4 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
 /**
  * @class Sink

@@ -1,6 +1,6 @@
-package dataStructures;
+package dtapc.dataStructures;
 
-import generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Cell;
 
 public class PairCells {
 

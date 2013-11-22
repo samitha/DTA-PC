@@ -1,12 +1,12 @@
-package dta_solver;
+package dtapc.dta_solver;
 
-import generalNetwork.state.State;
+import dtapc.generalNetwork.state.State;
 
 import java.util.Arrays;
 
-import org.coinor.Ipopt;
+import dtapc.org.coinor.Ipopt;
 
-import dta_solver.adjointMethod.IpOptOptimizer;
+import dtapc.dta_solver.adjointMethod.IpOptOptimizer;
 
 public class SO_OptimizerByFiniteDifferences extends SOPC_Optimizer {
 

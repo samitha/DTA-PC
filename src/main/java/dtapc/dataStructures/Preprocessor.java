@@ -1,4 +1,4 @@
-package dataStructures;
+package dtapc.dataStructures;
 
 /**
  * @package dataStructures 

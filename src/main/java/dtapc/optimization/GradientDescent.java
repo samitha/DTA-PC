@@ -1,6 +1,6 @@
-package optimization;
+package dtapc.optimization;
 
-import io.InputOutput;
+import dtapc.io.InputOutput;
 
 import java.awt.Color;
 
@@ -12,7 +12,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import dta_solver.adjointMethod.GradientDescentOptimizer;
+import dtapc.dta_solver.adjointMethod.GradientDescentOptimizer;
 
 public class GradientDescent extends GradientDescentMethod {
 

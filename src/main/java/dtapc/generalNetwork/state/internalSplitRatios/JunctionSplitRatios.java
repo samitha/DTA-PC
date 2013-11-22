@@ -1,9 +1,9 @@
-package generalNetwork.state.internalSplitRatios;
+package dtapc.generalNetwork.state.internalSplitRatios;
 
 import java.util.LinkedHashMap;
 
-import dataStructures.HashMapTripletDouble;
-import dataStructures.Triplet;
+import dtapc.dataStructures.HashMapTripletDouble;
+import dtapc.dataStructures.Triplet;
 
 /**
  * @brief Describe the split ratios for a junction at a given time step

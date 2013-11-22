@@ -1,11 +1,11 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import dataStructures.Numerical;
-import dataStructures.Preprocessor;
+import dtapc.dataStructures.Numerical;
+import dtapc.dataStructures.Preprocessor;
 
 /**
  * @brief The buffer holds the cars wanting to go to the cell but which can't

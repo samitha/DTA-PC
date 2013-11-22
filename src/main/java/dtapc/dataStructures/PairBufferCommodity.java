@@ -1,4 +1,4 @@
-package dataStructures;
+package dtapc.dataStructures;
 
 /**
  * @brief Tuple containing the id of a buffer and the one of a commodity.

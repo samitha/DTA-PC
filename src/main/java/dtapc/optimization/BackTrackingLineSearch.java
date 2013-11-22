@@ -1,6 +1,6 @@
-package optimization;
+package dtapc.optimization;
 
-import dta_solver.adjointMethod.GradientDescentOptimizer;
+import dtapc.dta_solver.adjointMethod.GradientDescentOptimizer;
 
 public class BackTrackingLineSearch implements LineSearchMethod {
 

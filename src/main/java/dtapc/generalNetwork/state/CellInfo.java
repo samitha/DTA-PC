@@ -1,9 +1,9 @@
-package generalNetwork.state;
+package dtapc.generalNetwork.state;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-import dataStructures.Numerical;
+import dtapc.dataStructures.Numerical;
 
 /**
  * @brief Full description of the state of a cell at a given time step.

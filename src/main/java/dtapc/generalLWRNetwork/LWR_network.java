@@ -1,11 +1,11 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
-import generalNetwork.data.demand.Demands;
-import generalNetwork.state.CellInfo;
-import generalNetwork.state.Profile;
-import generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
-import generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
-import generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
+import dtapc.generalNetwork.data.demand.Demands;
+import dtapc.generalNetwork.state.CellInfo;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
 
 import java.util.LinkedHashMap;
 import java.util.ListIterator;

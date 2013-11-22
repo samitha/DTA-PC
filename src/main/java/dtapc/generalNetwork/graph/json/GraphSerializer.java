@@ -1,8 +1,8 @@
-package generalNetwork.graph.json;
+package dtapc.generalNetwork.graph.json;
 
-import generalNetwork.graph.Graph;
-import generalNetwork.graph.Link;
-import generalNetwork.graph.Node;
+import dtapc.generalNetwork.graph.Graph;
+import dtapc.generalNetwork.graph.Link;
+import dtapc.generalNetwork.graph.Node;
 
 import java.lang.reflect.Type;
 import java.util.Vector;

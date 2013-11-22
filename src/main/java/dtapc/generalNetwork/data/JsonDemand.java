@@ -1,4 +1,4 @@
-package generalNetwork.data;
+package dtapc.generalNetwork.data;
 
 import com.google.gson.annotations.Expose;
 

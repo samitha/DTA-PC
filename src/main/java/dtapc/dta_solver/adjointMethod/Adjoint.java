@@ -1,6 +1,6 @@
-package dta_solver.adjointMethod;
+package dtapc.dta_solver.adjointMethod;
 
-import org.coinor.Ipopt;
+import dtapc.org.coinor.Ipopt;
 
 import cern.colt.matrix.tdouble.DoubleMatrix1D;
 import cern.colt.matrix.tdouble.algo.DenseDoubleAlgebra;

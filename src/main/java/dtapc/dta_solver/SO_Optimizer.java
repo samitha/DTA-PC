@@ -1,30 +1,30 @@
-package dta_solver;
+package dtapc.dta_solver;
 
-import io.InputOutput;
+import dtapc.io.InputOutput;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Destination;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.Origin;
-import generalNetwork.state.CellInfo;
-import generalNetwork.state.JunctionInfo;
-import generalNetwork.state.Profile;
-import generalNetwork.state.State;
-import generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
-import generalNetwork.state.internalSplitRatios.IntertemporalJunctionSplitRatios;
-import generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
-import generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Destination;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.state.CellInfo;
+import dtapc.generalNetwork.state.JunctionInfo;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.State;
+import dtapc.generalNetwork.state.externalSplitRatios.IntertemporalOriginsSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalJunctionSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
+import dtapc.generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
 
 import cern.colt.matrix.tdouble.DoubleMatrix1D;
 import cern.colt.matrix.tdouble.impl.SparseCCDoubleMatrix2D;
 import cern.colt.matrix.tdouble.impl.SparseDoubleMatrix1D;
 import cern.colt.matrix.tdouble.DoubleFactory1D;
-import dataStructures.Numerical;
-import dataStructures.Triplet;
-import dta_solver.adjointMethod.Adjoint;
+import dtapc.dataStructures.Numerical;
+import dtapc.dataStructures.Triplet;
+import dtapc.dta_solver.adjointMethod.Adjoint;
 
 /**
  * @Depreciated

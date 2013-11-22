@@ -1,4 +1,4 @@
-package dataStructures;
+package dtapc.dataStructures;
 
 /**
  * @brief A simple mutable implementation of Double. Used in @ref HollowHashMap

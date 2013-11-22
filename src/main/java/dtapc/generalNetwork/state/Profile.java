@@ -1,8 +1,8 @@
-package generalNetwork.state;
+package dtapc.generalNetwork.state;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.LWR_network;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.LWR_network;
 
 /**
  * @class Profile

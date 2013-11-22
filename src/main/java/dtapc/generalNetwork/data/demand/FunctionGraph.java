@@ -1,6 +1,6 @@
-package generalNetwork.data.demand;
+package dtapc.generalNetwork.data.demand;
 
-import graphics.GUI;
+import dtapc.graphics.GUI;
 
 import java.util.TreeSet;
 
@@ -11,7 +11,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import dta_solver.Discretization;
+import dtapc.dta_solver.Discretization;
 
 /**
  * @brief Represents the graph of a function.

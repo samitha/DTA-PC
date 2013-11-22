@@ -1,12 +1,12 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
 import com.google.gson.annotations.Expose;
 
-import generalNetwork.graph.GraphDestination;
-import generalNetwork.graph.Link;
-import generalNetwork.graph.Node;
-import generalNetwork.graph.Source;
-import generalNetwork.graph.json.JsonFactory;
+import dtapc.generalNetwork.graph.GraphDestination;
+import dtapc.generalNetwork.graph.Link;
+import dtapc.generalNetwork.graph.Node;
+import dtapc.generalNetwork.graph.Source;
+import dtapc.generalNetwork.graph.json.JsonFactory;
 
 public class Graph {
 

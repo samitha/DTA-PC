@@ -1,4 +1,4 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
 /**
  * @brief Unique ID factory for nodes and links

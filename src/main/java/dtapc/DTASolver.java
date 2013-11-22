@@ -1,15 +1,17 @@
+package dtapc;
+
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
-import optimization.GradientDescent;
-import optimization.GradientDescentMethod;
-import generalNetwork.graph.DisplayGUI;
-import generalNetwork.state.State;
-import graphics.GUI;
+import dtapc.optimization.GradientDescent;
+import dtapc.optimization.GradientDescentMethod;
+import dtapc.generalNetwork.graph.DisplayGUI;
+import dtapc.generalNetwork.state.State;
+import dtapc.graphics.GUI;
 
-import dta_solver.SOPC_Optimizer;
-import dta_solver.SO_OptimizerByFiniteDifferences;
-import dta_solver.Simulator;
+import dtapc.dta_solver.SOPC_Optimizer;
+import dtapc.dta_solver.SO_OptimizerByFiniteDifferences;
+import dtapc.dta_solver.Simulator;
 
 public class DTASolver {
 

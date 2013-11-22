@@ -1,14 +1,14 @@
-package generalNetwork.data.demand;
+package dtapc.generalNetwork.data.demand;
 
-import generalLWRNetwork.Origin;
-import generalNetwork.data.JsonDemand;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.data.JsonDemand;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import dta_solver.Discretization;
+import dtapc.dta_solver.Discretization;
 
 /**
  * @brief It maps a DemandFactory for every origin

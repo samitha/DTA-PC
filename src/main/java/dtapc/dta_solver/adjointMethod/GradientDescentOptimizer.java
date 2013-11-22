@@ -1,4 +1,4 @@
-package dta_solver.adjointMethod;
+package dtapc.dta_solver.adjointMethod;
 
 /**
  * Interface for a general gradient descent

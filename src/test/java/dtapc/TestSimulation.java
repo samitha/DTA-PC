@@ -1,8 +1,8 @@
-package jUnit;
+package dtapc;
 
 import static org.junit.Assert.*;
-import generalNetwork.state.Profile;
-import generalNetwork.state.State;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.State;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import dta_solver.Simulator;
+import dtapc.dta_solver.Simulator;
 
 public class TestSimulation {
 

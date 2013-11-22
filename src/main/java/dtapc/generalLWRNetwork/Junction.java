@@ -1,16 +1,16 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
-import generalNetwork.state.CellInfo;
-import generalNetwork.state.JunctionInfo;
-import generalNetwork.state.Profile;
-import generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
+import dtapc.generalNetwork.state.CellInfo;
+import dtapc.generalNetwork.state.JunctionInfo;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import dataStructures.Numerical;
-import dataStructures.PairCells;
+import dtapc.dataStructures.Numerical;
+import dtapc.dataStructures.PairCells;
 
 /**
  * @brief Represents a junction between cells

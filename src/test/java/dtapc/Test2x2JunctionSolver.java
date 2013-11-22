@@ -1,11 +1,11 @@
-package jUnit;
+package dtapc;
 
 import static org.junit.Assert.*;
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.RoadChunk;
-import generalNetwork.state.Profile;
-import generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.RoadChunk;
+import dtapc.generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.internalSplitRatios.JunctionSplitRatios;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,7 +19,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import dta_solver.Discretization;
+import dtapc.dta_solver.Discretization;
 
 public class Test2x2JunctionSolver {
 

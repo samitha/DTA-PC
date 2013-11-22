@@ -1,10 +1,10 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.DiscretizedGraph;
-import generalLWRNetwork.LWR_network;
-import generalLWRNetwork.RoadChunk;
-import generalNetwork.state.Profile;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.DiscretizedGraph;
+import dtapc.generalLWRNetwork.LWR_network;
+import dtapc.generalLWRNetwork.RoadChunk;
+import dtapc.generalNetwork.state.Profile;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import java.awt.geom.Line2D;
 
 import javax.swing.JPanel;
 
-import dta_solver.Simulator;
+import dtapc.dta_solver.Simulator;
 
 /**
  * @brief Allows to display a state on a network

@@ -1,12 +1,12 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
-import generalNetwork.graph.Graph;
-import generalNetwork.graph.GraphDestination;
-import generalNetwork.graph.Link;
-import generalNetwork.graph.Node;
-import generalNetwork.graph.Path;
-import generalNetwork.graph.Source;
-import generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
+import dtapc.generalNetwork.graph.Graph;
+import dtapc.generalNetwork.graph.GraphDestination;
+import dtapc.generalNetwork.graph.Link;
+import dtapc.generalNetwork.graph.Node;
+import dtapc.generalNetwork.graph.Path;
+import dtapc.generalNetwork.graph.Source;
+import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
 
 import java.util.HashMap;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
 /**
  * @brief Unique ID factory for cells and junctions

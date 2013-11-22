@@ -1,13 +1,13 @@
-package jUnit;
+package dtapc;
 
 import static org.junit.Assert.*;
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Junction;
-import generalLWRNetwork.NetworkUIDFactory;
-import generalLWRNetwork.RoadChunk;
-import generalNetwork.state.CellInfo;
-import generalNetwork.state.JunctionInfo;
-import generalNetwork.state.Profile;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.NetworkUIDFactory;
+import dtapc.generalLWRNetwork.RoadChunk;
+import dtapc.generalNetwork.state.CellInfo;
+import dtapc.generalNetwork.state.JunctionInfo;
+import dtapc.generalNetwork.state.Profile;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

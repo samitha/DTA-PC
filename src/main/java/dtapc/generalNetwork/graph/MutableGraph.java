@@ -1,4 +1,4 @@
-package generalNetwork.graph;
+package dtapc.generalNetwork.graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +8,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 
-import generalNetwork.graph.GraphDestination;
-import generalNetwork.graph.Link;
-import generalNetwork.graph.Node;
-import generalNetwork.graph.Source;
+import dtapc.generalNetwork.graph.GraphDestination;
+import dtapc.generalNetwork.graph.Link;
+import dtapc.generalNetwork.graph.Node;
+import dtapc.generalNetwork.graph.Source;
 
 public class MutableGraph {
 

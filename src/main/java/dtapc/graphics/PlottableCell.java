@@ -1,4 +1,4 @@
-package graphics;
+package dtapc.graphics;
 
 public interface PlottableCell {
 

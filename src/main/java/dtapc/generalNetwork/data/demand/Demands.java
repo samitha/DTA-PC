@@ -1,7 +1,7 @@
-package generalNetwork.data.demand;
+package dtapc.generalNetwork.data.demand;
 
-import generalLWRNetwork.Origin;
-import generalNetwork.data.JsonDemand;
+import dtapc.generalLWRNetwork.Origin;
+import dtapc.generalNetwork.data.JsonDemand;
 
 import java.util.Arrays;
 import java.util.HashMap;

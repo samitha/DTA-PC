@@ -1,7 +1,7 @@
-package jUnit;
+package dtapc;
 
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Junction;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Junction;
 
 /**
  * @brief Used to save/load small discrete network

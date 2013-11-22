@@ -1,10 +1,10 @@
-package generalNetwork.state.internalSplitRatios;
+package dtapc.generalNetwork.state.internalSplitRatios;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
-import dataStructures.HashMapTripletDouble;
-import dataStructures.Triplet;
+import dtapc.dataStructures.HashMapTripletDouble;
+import dtapc.dataStructures.Triplet;
 
 /**
  * @brief Saves the intertemporal split ratios for a given junction

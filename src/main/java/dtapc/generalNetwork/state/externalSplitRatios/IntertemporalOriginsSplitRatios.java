@@ -1,10 +1,10 @@
-package generalNetwork.state.externalSplitRatios;
+package dtapc.generalNetwork.state.externalSplitRatios;
 
-import generalLWRNetwork.Origin;
+import dtapc.generalLWRNetwork.Origin;
 
 import java.util.HashMap;
 
-import dataStructures.HashMapIntegerDouble;
+import dtapc.dataStructures.HashMapIntegerDouble;
 
 /**
  * @brief Describe the split ratios for all junctions

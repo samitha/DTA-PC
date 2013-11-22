@@ -1,6 +1,6 @@
-package jUnit;
+package dtapc;
 
-import dataStructures.Numerical;
+import dtapc.dataStructures.Numerical;
 
 public final class DebugFunctions {
 

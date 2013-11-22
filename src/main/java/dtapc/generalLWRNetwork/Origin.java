@@ -1,13 +1,13 @@
-package generalLWRNetwork;
+package dtapc.generalLWRNetwork;
 
-import generalNetwork.state.Profile;
+import dtapc.generalNetwork.state.Profile;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import dataStructures.HashMapIntegerDouble;
+import dtapc.dataStructures.HashMapIntegerDouble;
 
 /**
  * @brief The origin is for now a buffer

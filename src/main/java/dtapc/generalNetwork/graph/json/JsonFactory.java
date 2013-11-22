@@ -1,7 +1,7 @@
-package generalNetwork.graph.json;
+package dtapc.generalNetwork.graph.json;
 
-import generalNetwork.data.Json_data;
-import generalNetwork.graph.Graph;
+import dtapc.generalNetwork.data.Json_data;
+import dtapc.generalNetwork.graph.Graph;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

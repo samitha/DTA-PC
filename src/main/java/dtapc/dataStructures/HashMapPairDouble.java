@@ -1,4 +1,4 @@
-package dataStructures;
+package dtapc.dataStructures;
 
 import java.util.LinkedHashMap;
 

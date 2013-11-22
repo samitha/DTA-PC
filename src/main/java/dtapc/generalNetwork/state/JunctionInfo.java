@@ -1,13 +1,13 @@
-package generalNetwork.state;
+package dtapc.generalNetwork.state;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import dataStructures.PairCells;
-import generalLWRNetwork.Cell;
-import generalLWRNetwork.Junction;
+import dtapc.dataStructures.PairCells;
+import dtapc.generalLWRNetwork.Cell;
+import dtapc.generalLWRNetwork.Junction;
 
 /**
  * @brief Description of the state of a junction at a given time step

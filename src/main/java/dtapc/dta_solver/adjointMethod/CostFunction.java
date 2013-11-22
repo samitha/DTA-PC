@@ -1,6 +1,6 @@
-package dta_solver.adjointMethod;
+package dtapc.dta_solver.adjointMethod;
 
-import dataStructures.Tuple;
+import dtapc.dataStructures.Tuple;
 
 
 public interface CostFunction {
