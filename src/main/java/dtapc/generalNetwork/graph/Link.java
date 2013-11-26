@@ -12,7 +12,9 @@ public class Link {
   protected int unique_id;
   @Expose
   public double l, v, w, F_max, jam_density;
+  public double dt;
   public transient Node from, to;
+  public transient double initial_density;
 
   public Link(double l, double v, double w, double f_max, double jam_density,
       GraphUIDFactory id) {
