@@ -21,28 +21,28 @@ public class DTASolver {
   public static void main(String[] args) {
     // EditorGUI e = new EditorGUI();
     // reportExample();
-    complexExample();
-    /*
-     * System.out.println("*****************************************");
-     * System.out.println(" Gradient descent by finite differences  ");
-     * System.out.println("*****************************************");
-     * long startTime = System.currentTimeMillis();
-     * optimizationExampleByFiniteDifferences();
-     * long endTime = System.currentTimeMillis();
-     * long searchTime = endTime - startTime;
-     * System.out.println("Time (ms): " + searchTime);
-     */
-    /*
-     * System.out.println("*****************************************");
-     * System.out.println(" Gradient descent by the adjoint method  ");
-     * System.out.println("*****************************************");
-     * long startTime = System.currentTimeMillis();
-     * optimizationExampleWithHomeMadeGradient();
-     * long endTime = System.currentTimeMillis();
-     * long searchTime = endTime - startTime;
-     * System.out.println("Time (ms): " + searchTime);
-     */
-    // printExample();
+    // complexExample();
+    
+     System.out.println("*****************************************");
+     System.out.println(" Gradient descent by finite differences  ");
+     System.out.println("*****************************************");
+     long startTime = System.currentTimeMillis();
+     optimizationExampleByFiniteDifferences();
+     long endTime = System.currentTimeMillis();
+     long searchTime = endTime - startTime;
+     System.out.println("Time (ms): " + searchTime);
+     
+    
+//     System.out.println("*****************************************");
+//     System.out.println(" Gradient descent by the adjoint method  ");
+//     System.out.println("*****************************************");
+//     long startTime = System.currentTimeMillis();
+//     optimizationExampleWithHomeMadeGradient();
+//     long endTime = System.currentTimeMillis();
+//     long searchTime = endTime - startTime;
+//     System.out.println("Time (ms): " + searchTime);
+//     
+    //printExample();
   }
 
   public static void printExample() {
@@ -59,12 +59,12 @@ public class DTASolver {
 
   public static void optimizationExampleWithHomeMadeGradient() {
     /* Share of the compliant flow */
-    double alpha = 1;
+    double alpha = 0.01;
     boolean debug = false;
-    // String network_file = "graphs/TwoParallelPath.json";
-    // String data_file = "graphs/TwoParallelPathData.json";
-    String network_file = "JUnitTests/2x1JunctionNetwork.json";
-    String data_file = "JUnitTests/2x1JunctionNetworkData.json";
+    String network_file = "graphs/TwoParallelPath.json";
+    String data_file = "graphs/TwoParallelPathData.json";
+    //String network_file = "JUnitTests/2x1JunctionNetwork.json";
+    //String data_file = "JUnitTests/2x1JunctionNetworkData.json";
 
     Simulator simulator = new Simulator(network_file, data_file, alpha, debug);
 

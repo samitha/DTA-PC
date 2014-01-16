@@ -17,7 +17,7 @@ public class SO_OptimizerByFiniteDifferences extends SOPC_Optimizer {
 
   public SO_OptimizerByFiniteDifferences(Simulator simu) {
     super(simu);
-    ipOpt = new IpOptOptimizer(this);
+    //ipOpt = new IpOptOptimizer(this);
     simulator.initializSplitRatios();
   }
 

@@ -42,12 +42,11 @@ public class IntertemporalSplitRatios {
    * @brief Set all the internal split ratios for the non-compliant flow
    */
   public void addNonCompliantSplitRatios(DiscretizedGraph g,
-      JsonSplitRatios[] non_compliant_split_ratios,
-      HashMap<Integer, Origin> node_to_origin) {
+      JsonSplitRatios[] non_compliant_split_ratios) {
     assert g != null;
     if (non_compliant_split_ratios == null)
       return;
-    assert node_to_origin != null;
+    assert g.node_to_origin != null;
 
     JsonJunctionSplitRatios[] tmp;
     int node_id;
@@ -62,7 +61,7 @@ public class IntertemporalSplitRatios {
       // For all the entries
       for (int k = 0; k < tmp.length; k++) {
         // We check is the split ratio is from an origin
-        orig = node_to_origin.get(node_id);
+        orig = g.node_to_origin.get(node_id);
         if (orig != null) {
           ijsr.addNonCompliantSplitRatio(
               tmp[k].k,

@@ -42,8 +42,9 @@ public class Simulator {
   /** Share of the compliant flow */
   private double alpha;
 
-  protected Simulator(int delta_t, int nb_steps) {
+  public Simulator(int delta_t, int nb_steps, double alpha) {
     time_discretization = new Discretization(delta_t, nb_steps);
+    this.alpha = alpha;
   }
 
   /**
@@ -103,8 +104,7 @@ public class Simulator {
       System.out.print("Loading non compliant split-ratios from JSON...");
       discretized_graph.split_ratios.addNonCompliantSplitRatios(
           discretized_graph,
-          data.non_compliant_split_ratios,
-          discretized_graph.node_to_origin);
+          data.non_compliant_split_ratios);
       System.out.println("Done");
     } else {
       System.out.println("Full System Optimal detected.");
@@ -235,7 +235,8 @@ public class Simulator {
 
     int nb_steps = time_discretization.getNb_steps();
     System.out
-        .print("Initializing physical split-ratios at the origins...");
+        .println("Initializing physical split-ratios at the origins...");
+    System.out.println("steps: " + nb_steps + ", sources: " + discretized_graph.sources[0].getUniqueId() + ", alpha: " + alpha);
     splits =
         IntertemporalOriginsSplitRatios.defaultPhysicalSplitRatios(
             nb_steps,

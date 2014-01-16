@@ -218,12 +218,17 @@ public class MutableGraph {
     return links.lastElement();
   }
 
+  public Vector<Path> getPaths() {
+	    return paths;
+	  }
+
   @Override
   public String toString() {
     String result = "List of nodes:\n";
     for (int i = 0; i < nodes.size(); i++) {
       result += nodes.get(i).toString() + "\n";
     }
+    result += "\n";
     result += "List of links:\n";
     for (int i = 0; i < links.size(); i++) {
       result += links.get(i).toString() + "\n";

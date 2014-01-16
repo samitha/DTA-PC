@@ -12,6 +12,8 @@ import edu.berkeley.path.beats.jaxb.Link;
 import edu.berkeley.path.beats.simulator.ObjectFactory;
 import edu.berkeley.path.beats.simulator.Scenario;
 import edu.berkeley.path.beats.jaxb.FundamentalDiagram;
+import edu.berkeley.path.beats.jaxb.Route;
+import edu.berkeley.path.beats.jaxb.RouteLink;
 import edu.berkeley.path.beats.jaxb.RouteSet;
 import edu.berkeley.path.beats.jaxb.NetworkSet;
 import edu.berkeley.path.beats.jaxb.FundamentalDiagramProfile;
@@ -20,9 +22,11 @@ import edu.berkeley.path.beats.jaxb.Density;
 import edu.berkeley.path.beats.jaxb.Splitratio;
 import edu.berkeley.path.beats.jaxb.Demand;
 import edu.berkeley.path.beats.jaxb.DemandProfile;
-import dtapc.generalLWRNetwork.Origin;
-import dtapc.generalNetwork.data.demand.Demands;
-import dtapc.dta_solver.Discretization;
+import dtapc.generalNetwork.data.demand.DemandsFactory;
+import dtapc.generalNetwork.data.JsonDemand;
+import dtapc.generalNetwork.data.JsonJunctionSplitRatios;
+import dtapc.generalNetwork.data.JsonSplitRatios;
+import dtapc.dta_solver.SOPC_Optimizer;
 import dtapc.dta_solver.Simulator;
 import dtapc.dataStructures.HashMapPairCellsDouble;
 import dtapc.dataStructures.PairCells;
@@ -30,10 +34,13 @@ import dtapc.generalLWRNetwork.DiscretizedGraph;
 import dtapc.generalLWRNetwork.LWR_network;
 import dtapc.generalNetwork.graph.Graph;
 import dtapc.generalNetwork.graph.MutableGraph;
+import dtapc.generalNetwork.graph.Path;
 import dtapc.generalNetwork.state.internalSplitRatios.IntertemporalSplitRatios;
+import dtapc.optimization.GradientDescent;
 
 public class BeATS_test {
 	
+	static boolean verbose = true;
 	/**
 	 * @param args
 	 */
@@ -48,11 +55,11 @@ public class BeATS_test {
 		    System.out.println("Converting BeATS network to a DTAPC network...");
 		    // Translate the network
 		    NetworkSet network_set = scenario.getNetworkSet();
-		    List<edu.berkeley.path.beats.jaxb.Network> list = network_set
+		    List<edu.berkeley.path.beats.jaxb.Network> network_list = network_set
 		        .getNetwork();
-		    assert list.size() == 1;
-		    edu.berkeley.path.beats.jaxb.Network network = list.get(0);
-
+		    assert network_list.size() == 1;
+		    edu.berkeley.path.beats.jaxb.Network network = network_list.get(0);
+		    
 		    // Read the nodes
 		    Iterator<edu.berkeley.path.beats.jaxb.Node> node_iterator =
 		        network.getNodeList().getNode().iterator();
@@ -60,11 +67,15 @@ public class BeATS_test {
 		        new HashMap<Integer, edu.berkeley.path.beats.jaxb.Node>(
 		            network.getNodeList().getNode().size());
 		    edu.berkeley.path.beats.jaxb.Node tmp_node;
+		    System.out.println();
+		    System.out.println("BeATS Nodes:");
 		    while (node_iterator.hasNext()) {
 		      tmp_node = node_iterator.next();
-		      BeATS_nodes.put((Integer) (int) tmp_node.getId(), tmp_node);
+		      BeATS_nodes.put((int) tmp_node.getId(), tmp_node);
+			  System.out.println(BeATS_nodes.get((int) tmp_node.getId()).getId());
 		    }	
-		    
+		    System.out.println();
+
 		    // Read the links
 		    Iterator<edu.berkeley.path.beats.jaxb.Link> link_iterator =
 		        network.getLinkList().getLink().iterator();
@@ -72,10 +83,13 @@ public class BeATS_test {
 		        new HashMap<Integer, edu.berkeley.path.beats.jaxb.Link>(
 		            network.getLinkList().getLink().size());
 		    edu.berkeley.path.beats.jaxb.Link tmp_link;
+		    System.out.println("BeATS links:");
 		    while (link_iterator.hasNext()) {
 		      tmp_link = link_iterator.next();
 		      BeATS_links.put((Integer) (int) tmp_link.getId(), tmp_link);
+			  System.out.println(BeATS_links.get((int) tmp_link.getId()).getId());
 		    }
+		    System.out.println();
 			
 		    // Read the Fundamental Diagram profiles
 		    Iterator<FundamentalDiagramProfile> fdp_iterator =
@@ -90,10 +104,15 @@ public class BeATS_test {
 		            scenario
 		                .getFundamentalDiagramSet().getFundamentalDiagramProfile().size());
 
+		    System.out.println("BeATS FD params:");
 		    FundamentalDiagramProfile tmp_fdp;
 		    while (fdp_iterator.hasNext()) {
 		      tmp_fdp = fdp_iterator.next();
 		      fundamentalDiagramProfiles.put((int) tmp_fdp.getLinkId(), tmp_fdp);
+		      System.out.print(fundamentalDiagramProfiles.get((int) tmp_fdp.getLinkId()).getFundamentalDiagram().get(0).getCapacity() + ", ");
+		      System.out.print(fundamentalDiagramProfiles.get((int) tmp_fdp.getLinkId()).getFundamentalDiagram().get(0).getCapacity() + ", ");
+		      System.out.print(fundamentalDiagramProfiles.get((int) tmp_fdp.getLinkId()).getFundamentalDiagram().get(0).getCapacity());
+		      System.out.println();
 		    }
 		    
 		    /*
@@ -104,6 +123,8 @@ public class BeATS_test {
 		     */
 		    MutableGraph mutable_graph = new MutableGraph();
 
+		    System.out.println();
+		    System.out.println("Mutable graph nodes");
 		    /* We first add the nodes */
 		    Iterator<Node> BeATS_nodes_iterator = BeATS_nodes.values().iterator();
 		    HashMap<Integer, dtapc.generalNetwork.graph.Node> BeATS_node_to_Mutable_node =
@@ -114,8 +135,11 @@ public class BeATS_test {
 		      mutable_graph.addNode(0, 0);
 		      BeATS_node_to_Mutable_node.put((int) tmp_node.getId(),
 		          mutable_graph.getLastAddedNode());
+		      System.out.println(mutable_graph.getLastAddedNode().getUnique_id());
 		    }
+		    System.out.println();
 
+		    System.out.println("Mutable graph links");
 		    /* We then add the links */
 		    Iterator<Link> BeATS_links_iterator = BeATS_links.values().iterator();
 		    HashMap<Integer, dtapc.generalNetwork.graph.Link> BeATS_link_to_Mutable_link =
@@ -132,6 +156,10 @@ public class BeATS_test {
 		      to = BeATS_node_to_Mutable_node.get((int) tmp_link.getEnd().getNodeId());
 		      assert to != null;
 		      mutable_graph.addLink(from, to);
+		      System.out.print(mutable_graph.getLastAddedLink().getUnique_id() + " from node: ");
+		      System.out.print(mutable_graph.getLastAddedLink().from.getUnique_id() + " to: ");
+		      System.out.print(mutable_graph.getLastAddedLink().to.getUnique_id());
+		      System.out.println();
 
 		      BeATS_link_to_Mutable_link.put((int) tmp_link.getId(),
 		          mutable_graph.getLastAddedLink());
@@ -142,6 +170,7 @@ public class BeATS_test {
 		      dtapc.generalNetwork.graph.Link tmp = mutable_graph.getLastAddedLink();
 		      tmp.l = tmp_link.getLength();
 		    }
+		    System.out.println();
 
 		    assert mutable_graph.check() : "We should have nodes[i].id = i and links[i].id = i";
 
@@ -152,6 +181,7 @@ public class BeATS_test {
 		     * - Add origins and destinations
 		     */
 
+	    	System.out.println("Origins and destinations");
 		    // Add origins and destinations
 		    for (int i = 0; i < mutable_graph.sizeNode(); i++) {
 		      dtapc.generalNetwork.graph.Node tmp = mutable_graph.getNode(i);
@@ -174,29 +204,36 @@ public class BeATS_test {
 		      }
 		      if (tmp.incoming_links.isEmpty()) {
 			    mutable_graph.addSingleBufferSource(tmp);
+		    	System.out.println("Origin: " + tmp.getUnique_id());
 		      }
 		      if (tmp.outgoing_links.isEmpty()) {
 			    mutable_graph.addSingleBufferDestination(tmp);
+		    	System.out.println("Destination: " + tmp.getUnique_id());
 		      }
 		    }
 
+		    System.out.println();
+	    	System.out.println("Initial densities");
 		    // We get the initial densities and put them into the Mutable links
-		    Iterator<Density> densities =
+		    Iterator<Density> BeATS_densities_iterator =
 		        scenario.getInitialDensitySet().getDensity().iterator();
 
 		    Density tmp_density;
-		    while (densities.hasNext()) {
-		      tmp_density = densities.next();
+		    while (BeATS_densities_iterator.hasNext()) {
+		      tmp_density = BeATS_densities_iterator.next();
 		      dtapc.generalNetwork.graph.Link l =
 		          BeATS_link_to_Mutable_link.get((int) tmp_density.getLinkId());
 		      assert l != null;
 		      l.initial_density =
 		          Double.parseDouble(tmp_density.getContent());
+		      System.out.println(l.getUnique_id() + ": " + l.initial_density);
 		    }
 
 		    BeATS_links_iterator = BeATS_links.values().iterator();
 		    
-		    /* We update the fundamental triangular diagram in the links */
+	    	System.out.println();
+	    	System.out.println("Mutable graph FD params");
+	    	/* We update the fundamental triangular diagram in the links */
 		    /* The rest of the code currently only handles a single FD values across time */
 		    while (BeATS_links_iterator.hasNext()) {
 		        Link tmp = BeATS_links_iterator.next();
@@ -212,25 +249,52 @@ public class BeATS_test {
 			    	Mutable_link.w = tmp_fd.getCongestionSpeed();
 			    	Mutable_link.dt = fundamentalDiagramProfiles.get((int) tmp.getId()).getDt();
 			    	Mutable_link.jam_density = Mutable_link.F_max/Mutable_link.v + Mutable_link.F_max/Mutable_link.w;
-			    	System.out.println(Mutable_link.jam_density);
-			    	//			    }
+			    	System.out.print("link: " + Mutable_link.getUnique_id());
+			    	System.out.print(" F_max: " + Mutable_link.F_max);
+			    	System.out.print(" v: " + Mutable_link.v);
+			    	System.out.print(" w: " + Mutable_link.w);
+			    	System.out.print(" dt: " + Mutable_link.dt);
+			    	System.out.print(" jam_density: " + Mutable_link.jam_density);
+			    	System.out.println();
+
 		    }
 			   
-		    
+		    System.out.println();
 		    System.out.println(mutable_graph.toString());
+		    
+	    	System.out.println("Mutable graph paths ");
+		    // Add paths
+		    RouteSet BeATS_routeSet = scenario.getRouteSet();
+		    Iterator<Route> BeATS_routes_iterator = BeATS_routeSet.getRoute().iterator();
+		    while (BeATS_routes_iterator.hasNext()) {
+		    	Route tmpRoute = BeATS_routes_iterator.next();
+		    	ArrayList<Integer> routeList = new ArrayList<Integer>();
+		    	Iterator<RouteLink> routeLink_iterator = tmpRoute.getRouteLink().iterator();
+		    	while (routeLink_iterator.hasNext()) {
+		    		routeList.add((int) BeATS_link_to_Mutable_link.get((int) routeLink_iterator.next().getLinkId()).getUnique_id());
+		    	}
+		    	Path newpath = new Path((int) tmpRoute.getId(), routeList);
+		    	mutable_graph.addPath(newpath);
+		    	Iterator<Integer> pathList_iterator = mutable_graph.getPaths().get((int) tmpRoute.getId()-1).iterator();
+		    	System.out.print(tmpRoute.getId() + ": ");
+		    	while (pathList_iterator.hasNext()) {
+			    	System.out.print(pathList_iterator.next().intValue() + " ");
+		    	}
+		    	System.out.println();
+		    }
 
-		    Graph graph = new Graph(mutable_graph);
-
-		    /* This needs to not be hard coded */
-		    double delta_t = 300;
-		    int time_steps = 10;
+		    Graph graph = new Graph(mutable_graph);		    
+		    
+		    /* This needs to NOT be hard coded */
+		    int delta_t = 60;
+		    int time_steps = 80;
 
 		    DiscretizedGraph discretized_graph = new DiscretizedGraph(graph, delta_t,
 		        time_steps);
 
-		    // Now we build the discretized network
-		    LWR_network lwr_network = new LWR_network(discretized_graph);
-
+		    // Add internal split ratios
+		    System.out.println();
+		    System.out.println("Discretized graph split ratios");
 		    // We get the non-compliant split ratios
 //		    assert scenario.getSplitRatioSet().getSplitRatioProfile().size() == ? : 
 //		    	"Number of split ratio profiles should be equal to total commodities, which is
@@ -239,7 +303,7 @@ public class BeATS_test {
 		        .getSplitRatioSet()
 		        .getSplitRatioProfile()
 		        .get(0).getDt();
-		    System.out.println("Split ratios (dt =" + split_ratios_dt + "):");
+		    System.out.println("dt =" + split_ratios_dt);
 
 		    LinkedList<HashMapPairCellsDouble> SR_list =
 		        new LinkedList<HashMapPairCellsDouble>();
@@ -250,38 +314,66 @@ public class BeATS_test {
 		            .getSplitRatioProfile()
 		            .get(0).getSplitratio()
 		            .iterator();
-
+		    
 		    Splitratio tmp_SR;
+	    	JsonJunctionSplitRatios[] NC_split_ratios;
+		    JsonSplitRatios[] Json_SR = new JsonSplitRatios[1];
 		    while (non_compliant_SR_iterator.hasNext()) {
 		      tmp_SR = non_compliant_SR_iterator.next();
-		      HashMapPairCellsDouble non_compliant_split_ratios;
+		      if (tmp_SR.getVehicleTypeId() == 0) {
+				  System.out.println("Non-compliant split ratios:");
+		    	  HashMapPairCellsDouble non_compliant_split_ratios;
+		    	  List<String> history =
+		    			  new ArrayList<String>(Arrays.asList(tmp_SR.getContent().split(",")));
+		    	  double[] history_table = new double[history.size()];
+		    	  for (int i = 0; i < history_table.length; i++) {
+		    		  history_table[i] = Double.parseDouble(history.get(i));
+		    	  }
+		    	  NC_split_ratios = new JsonJunctionSplitRatios[history_table.length];
+		    	  for (int k = 0; k < history_table.length; k++) {
+		    		  if (k < SR_list.size()) {
+		    			  non_compliant_split_ratios = SR_list.get(k);
+		    		  }
+		    		  else {
+		    			  non_compliant_split_ratios = new HashMapPairCellsDouble();
+		    			  SR_list.addLast(non_compliant_split_ratios);
+		    		  }		    		  
+		    		  NC_split_ratios[k] = new JsonJunctionSplitRatios(k, (int) BeATS_link_to_Mutable_link.get((int) tmp_SR.getLinkIn()).getUnique_id(), 
+		    				  (int) BeATS_link_to_Mutable_link.get((int) tmp_SR.getLinkOut()).getUnique_id(), (int) tmp_SR.getVehicleTypeId(), history_table[k]);
 
-		      List<String> history =
-		          new ArrayList<String>(Arrays.asList(tmp_SR.getContent().split(",")));
-		      double[] history_table = new double[history.size()];
-		      for (int i = 0; i < history_table.length; i++)
-		        history_table[i] = Double.parseDouble(history.get(i));
-
-		      for (int k = 0; k < history_table.length; k++) {
-		        if (k < SR_list.size())
-		          non_compliant_split_ratios = SR_list.get(k);
-		        else {
-		          non_compliant_split_ratios = new HashMapPairCellsDouble();
-		          SR_list.addLast(non_compliant_split_ratios);
-		        }
-
-		        non_compliant_split_ratios.put(
-		            new PairCells((int) tmp_SR.getLinkIn(), (int) tmp_SR.getLinkOut()),
-		            history_table[k]);
-		      }
+		    		  non_compliant_split_ratios.put(
+		    				  new PairCells((int) BeATS_link_to_Mutable_link.get( (int)tmp_SR.getLinkIn()).getUnique_id(), BeATS_link_to_Mutable_link.get( (int) tmp_SR.getLinkOut()).getUnique_id()),
+		    				  history_table[k]);
+					  System.out.print("beta: " + NC_split_ratios[k].beta + " ");		    		  
+					  System.out.print("c: " + NC_split_ratios[k].c + " ");
+					  System.out.print("in_id: " + NC_split_ratios[k].in_id + " ");
+					  System.out.print("out_id: " + NC_split_ratios[k].out_id + " ");
+					  System.out.print("k: " + NC_split_ratios[k].k + " ");
+					  System.out.println();
+		    	  }
+				  System.out.println();
+		    	  Json_SR[0] = new JsonSplitRatios((int) BeATS_node_to_Mutable_node.get((int) scenario
+				            .getSplitRatioSet()
+				            .getSplitRatioProfile().get(0).getNodeId()).getUnique_id(), NC_split_ratios);
+				  System.out.println("Non-compliant split ratio node id:" + Json_SR[0].node_id);
+		       }
 		    }
+		    System.out.println();
 		    HashMapPairCellsDouble[] SR_array =
 		        new HashMapPairCellsDouble[SR_list.size()];
 		    SR_list.toArray(SR_array);
-
-		    System.out
-		        .println("Non-compliant split ratios:" + Arrays.toString(SR_array));
 		    
+		    IntertemporalSplitRatios intTempSR = discretized_graph.split_ratios;
+		    intTempSR.addNonCompliantSplitRatios(discretized_graph, Json_SR);
+		    
+		    // Now we build the discretized network
+		    LWR_network lwr_network = new LWR_network(discretized_graph);
+		   
+		    // Creating the simulator
+		    double alpha = 0.15; // Fraction of compliant flow
+		    Simulator simulator = new Simulator(delta_t, time_steps, alpha);
+		    simulator.discretized_graph = discretized_graph;
+		    simulator.lwr_network = lwr_network;
 		    
 		    // Demand set
 		    Iterator<DemandProfile> demandProfile_iterator =
@@ -289,9 +381,12 @@ public class BeATS_test {
 		    // For now we deal with only one origin
 		    assert scenario.getDemandSet().getDemandProfile().size() == 1;
 
-		    LinkedList<Double> demands = new LinkedList<Double>();
-
 		    DemandProfile tmp_demandProfile;
+		    JsonDemand[][] demandArray = new JsonDemand[1][time_steps];
+		    double[] totalDemand = new double[time_steps];
+		    for (int i = 0; i < time_steps; i++){
+	        	totalDemand[i] = 0;
+		    }
 		    while (demandProfile_iterator.hasNext()) { // There is only one for now
 		      tmp_demandProfile = demandProfile_iterator.next();
 
@@ -301,6 +396,8 @@ public class BeATS_test {
 		      double dt = tmp_demandProfile.getDt();
 		      int origin_id = (int) tmp_demandProfile.getLinkIdOrg();
 
+		      System.out.println("Demand for origin " + origin_id + " dt = " + dt);
+
 		      while (demand_iterator.hasNext()) {
 		        tmp_demand = demand_iterator.next();
 
@@ -308,31 +405,50 @@ public class BeATS_test {
 		            new ArrayList<String>(Arrays.asList(tmp_demand.getContent().split(
 		                ",")));
 		        double[] history_table = new double[history.size()];
-		        for (int i = 0; i < history_table.length; i++)
+		        for (int i = 0; i < history_table.length; i++){
 		          history_table[i] = Double.parseDouble(history.get(i));
+		          totalDemand[i] = totalDemand[i] + history_table[i];
+		        }
 
-		        System.out.println("Demand for origin " + origin_id + " (dt = " + dt
-		            + Arrays.toString(history_table));
+		        demandArray[0][(int) tmp_demand.getVehicleTypeId()] =  
+		        		  new JsonDemand((int) mutable_graph.getLink((int) BeATS_link_to_Mutable_link.get((int) tmp_demandProfile.getLinkIdOrg()).from.getUnique_id()).getUnique_id(), 
+		        				  history_table);
 		      }
 		    }
-
-		    System.out.println("Demand profiles:" + demands.toString());
 			
+	        JsonDemand[] json_demands = new JsonDemand[1];
+		    json_demands[0] = new JsonDemand((int) mutable_graph.getLink((int) BeATS_link_to_Mutable_link.get((int) scenario.getDemandSet().getDemandProfile().
+		    		get(0).getLinkIdOrg()).from.getUnique_id()).getUnique_id(), totalDemand);
+		    simulator.origin_demands = new DemandsFactory(simulator.time_discretization, delta_t, json_demands, discretized_graph.node_to_origin).buildDemands();
+		    System.out.println(simulator.origin_demands.toString());
+		    System.out.println();
+		    simulator.initializSplitRatios();
 
-		    // Add split ratio's and demands to the LWR network
-		    
-		    // Then we create all the nodes
-		    // we create the hash map PATH_node -> JB_node
-		    // We create all the links with the right values of the incoming links,
-		    // We create the Hash map PATH_link -> JB_Link
-		    // We update the correct in and out link in the jb-nodes.
-		    // We create the graph.
-		    // We add the non-compliant split ratios
-		    // We also need to create the path !!!
+		    System.out.println();
+		    System.out.println(simulator.splits.toString());
 
-		    // We also need to discretize the demand and the non-compliant split ratios
+		    /* Checking the requirements on the network */
+		    System.out
+		        .print("Checking that the network respect needed requirements...");
+		    lwr_network.checkConstraints(delta_t);
+		    System.out.println("Done");
+
 		    
-					
+	      if (verbose) {
+	          System.out.print("No control cost: "
+	              + simulator.objective() + "\n");
+	        }
+
+		    int maxIter = 10;
+		    SOPC_Optimizer optimizer = new SOPC_Optimizer(simulator);
+
+		    GradientDescent descentMethod = new GradientDescent(maxIter);
+		    descentMethod.setGradient_condition(10E-9);
+		    double[] result = descentMethod.solve(optimizer);
+		    System.out.println("Final control");
+		    for (int i = 0; i < result.length; i++)
+		      System.out.println(result[i]);
+
 			System.out.println("Test done!");
 			
 			} catch (Exception e) {

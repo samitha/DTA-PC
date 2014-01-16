@@ -1,0 +1,5 @@
+   <SplitRatioSet id="-1" project_id="-1">
+      <splitRatioProfile dt="300" id="-1" network_id="-1" node_id="353" start_time="0">
+         <splitratio link_in="327" link_out="352" vehicle_type_id="0" ids="non_compliant">0.912100,0.900800,0.909400,0.967000,0.988500,0.954900,0.963100,0.997500,0.996100,1.000000,0.995000,0.995100</splitratio>
+      </splitRatioProfile>
+   </SplitRatioSet>

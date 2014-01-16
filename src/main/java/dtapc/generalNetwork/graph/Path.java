@@ -18,6 +18,11 @@ public class Path {
     unique_id = id.getId_Path();
     path_list = new ArrayList<Integer>();
   }
+  
+  public Path(int id, ArrayList<Integer> pathList) {
+	    unique_id = id;
+	    path_list = pathList;
+  }
 
   public Path(ArrayList<Integer> l) {
     path_list = l;
@@ -37,7 +42,7 @@ public class Path {
     }
   }
 
-  public Integer getFirstLink() {
+  public int getFirstLink() {
     return path_list.get(0);
   }
 
