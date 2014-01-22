@@ -66,6 +66,7 @@ public class DTASolver {
     //String network_file = "JUnitTests/2x1JunctionNetwork.json";
     //String data_file = "JUnitTests/2x1JunctionNetworkData.json";
 
+
     Simulator simulator = new Simulator(network_file, data_file, alpha, debug);
 
     int maxIter = 150;
@@ -80,9 +81,11 @@ public class DTASolver {
 
   public static void optimizationExampleByFiniteDifferences() {
     /* Share of the compliant flow */
-    double alpha = 1;
+    double alpha = .1;
     String network_file = "graphs/TwoParallelPath.json";
     String data_file = "graphs/TwoParallelPathData.json";
+
+    System.out.println("Two parallel paths test");
 
     Simulator simulator = new Simulator(network_file, data_file, alpha, false);
 

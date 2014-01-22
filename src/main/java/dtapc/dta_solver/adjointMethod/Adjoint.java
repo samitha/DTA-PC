@@ -139,4 +139,19 @@ public abstract class Adjoint<T extends JavaSystemState> implements
   public void setMaxIter(int maxIter) {
     this.maxIter = maxIter;
   }
+
+public void projectControl(double[] control) {
+	// TODO Auto-generated method stub
+	
+}
+
+public double objective(double[] control) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public double[] getStartingPoint() {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
