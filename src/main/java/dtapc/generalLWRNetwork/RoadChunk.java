@@ -14,38 +14,42 @@ import dtapc.dataStructures.Preprocessor;
 public class RoadChunk extends Cell {
 
 	/* Constants */
-	public double length, v, w, F_max, jam_density;
+	public double length, v, w;
+	public double[] F_max, jam_density;
 	private Junction next;
 
 	/* Variables */
 	public LinkedHashMap<Integer, Double> initial_densities;
-	private double supply_change;
-	private double demande_change;
+	private double[] supply_change;
+	private double[] demande_change;
 
 	private void build(double l, double v, double w, double f_max,
-			double jam_capacity) {
+			double jam_capacity, int nb_time_steps) {
 		this.length = l;
 		this.v = v;
 		this.w = w;
-		F_max = f_max;
-		this.jam_density = jam_capacity;
-
-		supply_change = -F_max / w + jam_density;
-		demande_change = F_max / v;
+		F_max = new double[nb_time_steps];
+		jam_density = new double[nb_time_steps];
+		for (int i = 0; i < F_max.length; i++) {
+			F_max[i] = f_max;
+			this.jam_density[i] = jam_capacity;
+			supply_change[i] = -F_max[i] / w + jam_density[i];
+			demande_change[i] = F_max[i] / v;
+		}
 	}
 
 	public RoadChunk(double l, double v, double w, double f_max,
-			double jam_capacity) {
+			double jam_capacity, int nb_time_steps) {
 		super();
-		build(l, v, w, f_max, jam_capacity);
+		build(l, v, w, f_max, jam_capacity, nb_time_steps);
 		this.initial_densities = new LinkedHashMap<Integer, Double>();
 	}
 
 	public RoadChunk(double l, double v, double w, double f_max,
 			double jam_capacity,
-			LinkedHashMap<Integer, Double> initial_densities) {
+			LinkedHashMap<Integer, Double> initial_densities, int nb_time_steps) {
 		super();
-		build(l, v, w, f_max, jam_capacity);
+		build(l, v, w, f_max, jam_capacity, nb_time_steps);
 
 		this.initial_densities = new LinkedHashMap<Integer, Double>(
 				initial_densities);
@@ -58,9 +62,10 @@ public class RoadChunk extends Cell {
 	 * @param jam_capacity
 	 * @param delta_t
 	 */
-	public RoadChunk(double v, double f_max, double jam_capacity, double delta_t) {
+	public RoadChunk(double v, double f_max, double jam_capacity,
+			double delta_t, int nb_time_steps) {
 		build(v * delta_t, v, v * f_max / (v * jam_capacity - f_max), f_max,
-				jam_capacity);
+				jam_capacity, nb_time_steps);
 		this.initial_densities = new LinkedHashMap<Integer, Double>();
 	}
 
@@ -82,7 +87,8 @@ public class RoadChunk extends Cell {
 		System.out.println(toString());
 	}
 
-	public boolean isCongested(double density) {
+	public boolean isCongested(double density, int time_step) {
+		double supply_change = -F_max[time_step] / w + jam_density[time_step];
 		return density > supply_change;
 	}
 
@@ -128,26 +134,30 @@ public class RoadChunk extends Cell {
 							+ (v * delta_t)
 							+ "(exponential decrease of the density in a emptying cell)");
 
-		assert F_max < w * jam_density : "Cell " + u_id
-				+ ": We should have F_max < w * jam_density";
-
-		assert demande_change <= supply_change : "Cell "
-				+ u_id
-				+ ": "
-				+ demande_change
-				+ "<="
-				+ supply_change
-				+ ": The density of free-flow should be smaller than the density of jammed flow.";
+		   for (int i = 0; i < F_max.length; i++) {
+			       double supply_change = -F_max[i] / w + jam_density[i];
+			       double demande_change = F_max[i] / v;
+			       assert F_max[i] < w * jam_density[i] : "Cell " + u_id
+			           + ": We should have F_max < w * jam_density";
+			 
+			       assert demande_change <= supply_change : "Cell "
+			           + u_id
+			           + ": "
+			           + demande_change
+			           + "<="
+			           + supply_change
+			           + ": The density of free-flow should be smaller than the density of jammed flow.";
+			     }
 	}
 
 	@Override
-	public double getDemand(double density, double delta_t) {
-		return Math.max(0, Math.min(F_max, v * density));
+	public double getDemand(double density, int time_step, double delta_t) {
+		return Math.max(0, Math.min(F_max[time_step], v * density));
 	}
 
 	@Override
-	public double getDerivativeDemand(double total_density, double delta_t) {
-		if (v * total_density < F_max) {
+	public double getDerivativeDemand(double total_density, int time_step, double delta_t) {
+		if (v * total_density < F_max[time_step]) {
 			return v;
 		} else {
 			return 0.0;
@@ -155,13 +165,13 @@ public class RoadChunk extends Cell {
 	}
 
 	@Override
-	public double getSupply(double density) {
-		return Math.max(0, Math.min(F_max, w * (jam_density - density)));
+	public double getSupply(double density, int k) {
+		return Math.max(0, Math.min(F_max[k], w * (jam_density[k] - density)));
 	}
 
 	@Override
-	public double getDerivativeSupply(double total_density) {
-		if (F_max < w * (jam_density - total_density))
+	public double getDerivativeSupply(double total_density, int k) {
+		if (F_max[k] < w * (jam_density[k] - total_density))
 			return 0.0;
 		else
 			return -w;
@@ -182,8 +192,8 @@ public class RoadChunk extends Cell {
 	}
 
 	@Override
-	public double getJamDensity() {
-		return jam_density;
+	public double getJamDensity(int k) {
+		return jam_density[k];
 	}
 
 	@Override

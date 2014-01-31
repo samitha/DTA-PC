@@ -34,22 +34,22 @@ class Sink extends Cell {
   }
 
   @Override
-  public double getDemand(double density, double delta_t) {
+  public double getDemand(double density, int time_step, double delta_t) {
     return 0;
   }
 
   @Override
-  public double getDerivativeDemand(double total_density, double delta_t) {
+  public double getDerivativeDemand(double total_density, int time_step, double delta_t) {
     return 0;
   }
 
   @Override
-  public double getSupply(double density) {
+  public double getSupply(double density, int time_step) {
     return Double.MAX_VALUE;
   }
 
   @Override
-  public double getDerivativeSupply(double total_density) {
+  public double getDerivativeSupply(double total_density, int time_step) {
     return 0;
   }
 
@@ -137,7 +137,7 @@ class Sink extends Cell {
   }
 
   @Override
-  public double getJamDensity() {
+  public double getJamDensity(int time_step) {
     assert (false);
     return Double.MAX_VALUE;
   }

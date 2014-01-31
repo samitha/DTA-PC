@@ -413,7 +413,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
 
             for (int c = 0; c < (C + 1); c++) {
               double value = lambda.get(rho(k, limiting_demand_id, c))
-                  + in_links[0].getDerivativeDemand(total_density, delta_t)
+                  + in_links[0].getDerivativeDemand(total_density, k, delta_t)
                   * lambda.get(f_out(k, limiting_demand_id, c));
               assert Numerical.validNumber(value);
               lambda.set(rho(k, limiting_demand_id, c), value);
@@ -448,7 +448,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
                   .get(k)
                   .getCell(limiting_outgoing_link).total_density;
               double backspeed = limiting_outgoing_link
-                  .getDerivativeSupply(limiting_density);
+                  .getDerivativeSupply(limiting_density, k);
 
               value = backspeed * value;
 
@@ -526,6 +526,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
                 double total_density = info.total_density;
                 double coefficient = cells[id].getDerivativeDemand(
                     total_density,
+                    k,
                     delta_t);
                 if (coefficient != 0)
                   for (int c = 0; c < (C + 1); c++) {
@@ -626,6 +627,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
                 double total_density = info.total_density;
                 double coefficient = cells[id].getDerivativeDemand(
                     total_density,
+                    k,
                     delta_t);
                 if (coefficient != 0)
                   for (int c = 0; c < (C + 1); c++) {
@@ -670,6 +672,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
               double coef = cells[demand_priority].getDerivativeDemand(state
                   .get(k)
                   .getCell(demand_priority).total_density,
+                  k,
                   delta_t);
               for (int c = 0; c < (C + 1); c++) {
                 lambda.set(rho(k, demand_priority, c),
@@ -694,7 +697,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
               int out_id = out_links[0].getUniqueId();
 
               coef = cells[out_id].getDerivativeSupply(state.get(k).getCell(
-                  out_id).total_density);
+                  out_id).total_density, k);
               for (int c = 0; c < (C + 1); c++) {
                 lambda.set(rho(k, out_id, c),
                     lambda.get(rho(k, out_id, c)) + coef * value);
