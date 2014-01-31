@@ -247,7 +247,7 @@ public class BeATS_test {
 			    	Mutable_link.F_max = tmp_fd.getCapacity();
 			    	Mutable_link.v = tmp_fd.getFreeFlowSpeed();
 			    	Mutable_link.w = tmp_fd.getCongestionSpeed();
-			    	Mutable_link.dt = fundamentalDiagramProfiles.get((int) tmp.getId()).getDt();
+			    	//Mutable_link.dt = fundamentalDiagramProfiles.get((int) tmp.getId()).getDt();
 			    	Mutable_link.jam_density = Mutable_link.F_max/Mutable_link.v + Mutable_link.F_max/Mutable_link.w;
 			    	System.out.print("link: " + Mutable_link.getUnique_id());
 			    	System.out.print(" F_max: " + Mutable_link.F_max);
@@ -286,7 +286,7 @@ public class BeATS_test {
 		    Graph graph = new Graph(mutable_graph);		    
 		    
 		    /* This needs to NOT be hard coded */
-		    int delta_t = 60;
+		    int delta_t =60;
 		    int time_steps = 80;
 
 		    DiscretizedGraph discretized_graph = new DiscretizedGraph(graph, delta_t,
