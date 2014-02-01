@@ -98,6 +98,12 @@ public class IntertemporalSplitRatios {
 		junctions_split_ratios.get(junction.getUniqueId())
 				.addCompliantSplitRatio(in_id, out_id, commodity, split);
 	}
+	
+	public void addNonCompliantSRToJunction(int in_id, int out_id, int commodity,
+			int split, Junction junction, int k) {
+		junctions_split_ratios.get(junction.getUniqueId())
+				.addNonCompliantSplitRatio(k, in_id, out_id, commodity, split);
+	}
 
 	@Override
 	public String toString() {
