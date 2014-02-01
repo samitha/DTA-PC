@@ -117,7 +117,8 @@ public class Simulator {
 		if (alpha != 1) {
 			System.out
 					.print("Checking that the split-ratios of the non-compliant flows are well defined ...");
-			boolean is_valid = lwr_network.check_non_compliant_flows_integrity();
+			boolean is_valid = lwr_network
+					.check_non_compliant_flows_integrity();
 			if (is_valid) {
 				System.out.println("Done");
 			} else {
@@ -144,6 +145,20 @@ public class Simulator {
 			System.out.println("Printing the compact form");
 			lwr_network.print();
 			lwr_network.printInternalSplitRatios();
+		}
+	}
+
+	public void Validate() {
+		if (alpha != 1) {
+			System.out
+					.print("Checking that the split-ratios of the non-compliant flows are well defined ...");
+			boolean is_valid = lwr_network
+					.check_non_compliant_flows_integrity();
+			if (is_valid) {
+				System.out.println("Done");
+			} else {
+				System.err.print("Failed !");
+			}
 		}
 	}
 
@@ -238,12 +253,14 @@ public class Simulator {
 		int nb_steps = time_discretization.getNb_steps();
 		System.out
 				.println("Initializing physical split-ratios at the origins...");
-		System.out.println("steps: " + nb_steps + ", sources: "
-				+ discretized_graph.sources[0].getUniqueId() + ", alpha: "
-				+ alpha);
-		assert(lwr_network.getSources() != null);
+		// System.out.println("steps: " + nb_steps + ", sources: "
+		// + discretized_graph.sources[0].getUniqueId() + ", alpha: "
+		// + alpha);
+		assert (lwr_network.getSources() != null);
 		splits = IntertemporalOriginsSplitRatios.defaultPhysicalSplitRatios(
-				nb_steps, discretized_graph.sources, alpha);
+				nb_steps, lwr_network.sources, alpha);
+		splits = IntertemporalOriginsSplitRatios.defaultPhysicalSplitRatios(
+				nb_steps, lwr_network.sources, alpha);
 		System.out.println("Done");
 	}
 

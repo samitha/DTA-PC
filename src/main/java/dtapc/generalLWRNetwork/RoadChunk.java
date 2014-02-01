@@ -20,8 +20,8 @@ public class RoadChunk extends Cell {
 
 	/* Variables */
 	public LinkedHashMap<Integer, Double> initial_densities;
-	private double[] supply_change;
-	private double[] demande_change;
+	//private double[] supply_change;
+	//private double[] demande_change;
 
 	private void build(double l, double v, double w, double f_max,
 			double jam_capacity, int nb_time_steps) {
@@ -33,8 +33,8 @@ public class RoadChunk extends Cell {
 		for (int i = 0; i < F_max.length; i++) {
 			F_max[i] = f_max;
 			this.jam_density[i] = jam_capacity;
-			supply_change[i] = -F_max[i] / w + jam_density[i];
-			demande_change[i] = F_max[i] / v;
+			//supply_change[i] = -F_max[i] / w + jam_density[i];
+			//demande_change[i] = F_max[i] / v;
 		}
 	}
 
@@ -72,8 +72,9 @@ public class RoadChunk extends Cell {
 	public String detailstoString() {
 		return "Cell: " + getUniqueId() + "\n" + "F_in=" + F_max + "\n"
 				+ "F_max=" + F_max + "\n" + "v=" + v + "\n" + "w=" + w + "\n"
-				+ "jam_density=" + jam_density + "\n" + "\n" + "supply_change="
-				+ supply_change + "\n" + "demande_change=" + demande_change;
+				+ "jam_density=" + jam_density;
+		//+ "\n" + "\n" + "supply_change="
+		//				+ supply_change + "\n" + "demande_change=" + demande_change;
 	}
 
 	@Override

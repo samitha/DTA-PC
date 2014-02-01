@@ -42,10 +42,10 @@ public class Test2x1JunctionSolver {
     NetworkUIDFactory.resetJunction_id();
 
     // Constructing the 2x1 junction
-    RoadChunk rc1 = new RoadChunk(3.0, 3.0, 3.0, delta_t);
-    RoadChunk rc2 = new RoadChunk(2.0, 2.0, 2.0, delta_t);
+    RoadChunk rc1 = new RoadChunk(3.0, 3.0, 3.0, delta_t,0);
+    RoadChunk rc2 = new RoadChunk(2.0, 2.0, 2.0, delta_t,0);
 
-    RoadChunk rc3 = new RoadChunk(2.5, 2.5, 2.0, delta_t);
+    RoadChunk rc3 = new RoadChunk(2.5, 2.5, 2.0, delta_t,0);
 
     junction2x1 = new Junction(new Cell[] { rc1, rc2 }, new Cell[] { rc3 });
     HashMap<Integer, Double> priorities = new HashMap<Integer, Double>(2);
@@ -67,8 +67,8 @@ public class Test2x1JunctionSolver {
       /*
        * The demand and the supply depend on the network and the density
        */
-      demand = cells[cell_id].getDemand(density, delta_t);
-      supply = cells[cell_id].getSupply(density);
+      demand = cells[cell_id].getDemand(density, 0, delta_t);
+      supply = cells[cell_id].getSupply(density,0);
       assert demand >= 0 : "Demand should be positive";
       assert supply >= 0 : "Supply should be positive";
 

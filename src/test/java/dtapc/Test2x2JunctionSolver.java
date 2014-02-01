@@ -36,10 +36,10 @@ public class Test2x2JunctionSolver {
     discretization = new Discretization(delta_t, 1);
 
     // Constructing the 2x1 junction
-    RoadChunk rc1 = new RoadChunk(3.0, 3.0, 3.0, delta_t);
-    RoadChunk rc2 = new RoadChunk(2.0, 2.0, 2.0, delta_t);
+    RoadChunk rc1 = new RoadChunk(3.0, 3.0, 3.0, delta_t,0);
+    RoadChunk rc2 = new RoadChunk(2.0, 2.0, 2.0, delta_t,0);
 
-    RoadChunk rc3 = new RoadChunk(2.5, 2.5, 2.0, delta_t);
+    RoadChunk rc3 = new RoadChunk(2.5, 2.5, 2.0, delta_t,0);
 
     junction2x1 = new Junction(new Cell[] { rc1, rc2 }, new Cell[] { rc3 });
     HashMap<Integer, Double> priorities = new HashMap<Integer, Double>(2);

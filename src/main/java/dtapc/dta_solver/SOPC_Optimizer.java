@@ -577,7 +577,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
               int out_id = out_links[0].getUniqueId();
               double coefficient = cells[out_id].getDerivativeSupply(state
                   .get(k)
-                  .getCell(out_id).total_density);
+                  .getCell(out_id).total_density, k);
               if (coefficient == 0)
                 continue;
 

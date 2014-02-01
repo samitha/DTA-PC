@@ -46,7 +46,7 @@ public class BeATS_test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String configfilename = "/Users/Samitha/Documents/github/DTA-PC/graphs/Rerouting_sent_newxsd_v2.xml";
+		String configfilename = "/Users/Samitha/Documents/github/DTA-PC/graphs/Rerouting_sent_newxsd_v3.xml";
 			Scenario scenario;
 			try {
 				
@@ -370,7 +370,7 @@ public class BeATS_test {
 		    LWR_network lwr_network = new LWR_network(discretized_graph);
 		   
 		    // Creating the simulator
-		    double alpha = 0.15; // Fraction of compliant flow
+		    double alpha = 0.01; // Fraction of compliant flow
 		    Simulator simulator = new Simulator(delta_t, time_steps, alpha);
 		    simulator.discretized_graph = discretized_graph;
 		    simulator.lwr_network = lwr_network;
