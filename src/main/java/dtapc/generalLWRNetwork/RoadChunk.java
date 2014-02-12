@@ -37,9 +37,31 @@ public class RoadChunk extends Cell {
 			//demande_change[i] = F_max[i] / v;
 		}
 	}
+	
+	private void build(double l, double v, double w, double[] f_max,
+			double[] jam_capacity, int nb_time_steps) {
+		this.length = l;
+		this.v = v;
+		this.w = w;
+		F_max = new double[nb_time_steps];
+		jam_density = new double[nb_time_steps];
+		for (int i = 0; i < F_max.length; i++) {
+			F_max[i] = f_max[i];
+			this.jam_density[i] = jam_capacity[i];
+			//supply_change[i] = -F_max[i] / w + jam_density[i];
+			//demande_change[i] = F_max[i] / v;
+		}
+	}
 
 	public RoadChunk(double l, double v, double w, double f_max,
 			double jam_capacity, int nb_time_steps) {
+		super();
+		build(l, v, w, f_max, jam_capacity, nb_time_steps);
+		this.initial_densities = new LinkedHashMap<Integer, Double>();
+	}
+	
+	public RoadChunk(double l, double v, double w, double[] f_max,
+			double[] jam_capacity, int nb_time_steps) {
 		super();
 		build(l, v, w, f_max, jam_capacity, nb_time_steps);
 		this.initial_densities = new LinkedHashMap<Integer, Double>();

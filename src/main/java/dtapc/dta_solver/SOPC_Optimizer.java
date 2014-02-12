@@ -50,7 +50,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
   /* Size of a block describing all the supply/demand at one time step */
   protected int size_demand_suply_block;
   /* Size of the block describing all the Aggregate SR at one time sate */
-  protected int size_aggregate_split_ratios;
+  protected int size_aggregate_split_ratios_block;
   /* Size of a block describing out-flows */
   protected int size_f_out_block;
   /* Total size of the description of a profile for a given time step */
@@ -89,18 +89,18 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
       tmp_nb_aggregate_split_ratios +=
           junction.getPrev().length * junction.getNext().length;
     }
-    size_aggregate_split_ratios = tmp_nb_aggregate_split_ratios;
+    size_aggregate_split_ratios_block = tmp_nb_aggregate_split_ratios;
     /* Size of a block describing out-flows or in-flows */
     size_f_out_block = size_density_block;
     /* Total size of the description of a profile for a given time step */
     x_block_size = (3 * (C + 1) + 2) * cells.length
-        + size_aggregate_split_ratios;
+        + size_aggregate_split_ratios_block;
 
     demand_supply_position = size_density_block;
     aggregate_split_ratios_position =
         demand_supply_position + size_demand_suply_block;
     f_out_position =
-        aggregate_split_ratios_position + size_aggregate_split_ratios;
+        aggregate_split_ratios_position + size_aggregate_split_ratios_block;
     f_in_position = f_out_position + size_f_out_block;
 
     simulator.initializSplitRatios();
@@ -873,7 +873,7 @@ public class SOPC_Optimizer implements GradientDescentOptimizer {
         + " cells\n" +
         "- demand_supply: " + size_demand_suply_block +
         " : 2 (for demand, supply) * " + cells.length + " cells)\n" +
-        "- aggregate SR: " + size_aggregate_split_ratios +
+        "- aggregate SR: " + size_aggregate_split_ratios_block +
         " (is the sum of the in.size() * out.size() at all junctions)\n" +
         "- f_out: " + size_density_block +
         " : (same as the density block)\n" +

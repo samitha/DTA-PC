@@ -327,6 +327,8 @@ public class DTASolver {
 
   public static void ToyNetwork() {
 
+	    System.out.print("Running the Toy Network...");
+
 	    /* Reset the unique id generators for cells and junctions */
 	    NetworkUIDFactory.resetCell_id();
 	    NetworkUIDFactory.resetJunction_id();
@@ -406,7 +408,7 @@ public class DTASolver {
 	    /* We create the intertemporal split ratios */
 	    LinkedList<Integer> commodities_at_origin = new LinkedList<Integer>();
 	    o.setCompliant_commodities(commodities_at_origin);
-	    o.getCompliant_commodities();
+	    System.out.println("Compliant commodities: " + o.getCompliant_commodities());
 	    commodities_at_origin.add(1);
 	    commodities_at_origin.add(2);
 	    IntertemporalSplitRatios split_ratios =
@@ -417,16 +419,12 @@ public class DTASolver {
 	    split_ratios.addCompliantSRToJunction(1, 3, 2, 1, j_1);
 	    
 	    LWR_network graph = new LWR_network(cell_list, junction_list, origins,
-	        destinations, split_ratios, 3);
-	    graph.print();
-	    graph.printInternalSplitRatios();
+	        destinations, split_ratios, 2);
 
 	    /* Creation of the simulator */
-	    double alpha = .1; // Fraction of compliant flow
+	    double alpha = .99; // Fraction of compliant flow
 	    Simulator simulator = new Simulator(delta_t, nb_time_steps, alpha);
 	    simulator.lwr_network = graph;
-	    simulator.time_discretization = new Discretization(delta_t, nb_time_steps);
-	    simulator.Validate();
 
 	    /* Creation of the demands */
 	    Demands origin_demands;
@@ -438,13 +436,15 @@ public class DTASolver {
 	    origin_demands = new DemandsFactory(simulator.time_discretization,
 	        delta_t, data.demands, node_to_origin)
 	        .buildDemands();
-	    split_ratios.addNonCompliantSplitRatios(simulator.discretized_graph, data.non_compliant_split_ratios);
+	    split_ratios.addNonCompliantSplitRatiosJID(data.non_compliant_split_ratios, junctions);
+	    graph.print();
+	    graph.printInternalSplitRatios();
 	    System.out.println("Done");
 
 	    System.out.println(origin_demands.toString());
 
 	    simulator.origin_demands = origin_demands;
-	    simulator.initializSplitRatios();
+	    simulator.initializSplitRatios(); // Compliant demand is split uniformly across compliant commodities
 
 	    System.out.println(simulator.splits.toString());
 
@@ -453,6 +453,8 @@ public class DTASolver {
 	        .print("Checking that the network respect needed requirements...");
 	    graph.checkConstraints(delta_t);
 	    System.out.println("Done");
+	    /* Validating simulator */
+	    simulator.Validate();
 
 	    /* Running the simulation */
 	    int maxIter = 100;

@@ -41,6 +41,27 @@ public class IntertemporalSplitRatios {
 						new IntertemporalJunctionSplitRatios(total_time_step));
 		}
 	}
+	
+	/**
+	 * @brief Set all the internal split ratios for the non-compliant flow
+	 */
+	public void addNonCompliantSplitRatiosJID(JsonSplitRatios[] non_compliant_split_ratios, Junction[] junctions) {
+		if (non_compliant_split_ratios == null)
+			return;
+
+		int node_id;
+		// For all the junctions
+		for (int j = 0; j < non_compliant_split_ratios.length; j++) {
+			node_id = non_compliant_split_ratios[j].node_id;
+			JsonJunctionSplitRatios[] splits = non_compliant_split_ratios[j].split_ratios;
+			// For all the entries
+			for (int k = 0; k < splits.length; k++) {
+				JsonJunctionSplitRatios currSplit = splits[k];
+				addNonCompliantSRToJunction(currSplit.in_id, currSplit.out_id, currSplit.c,
+						currSplit.beta, junctions[node_id], currSplit.k);
+			}
+		}
+	}
 
 	/**
 	 * @brief Set all the internal split ratios for the non-compliant flow
@@ -100,7 +121,7 @@ public class IntertemporalSplitRatios {
 	}
 	
 	public void addNonCompliantSRToJunction(int in_id, int out_id, int commodity,
-			int split, Junction junction, int k) {
+			double split, Junction junction, int k) {
 		junctions_split_ratios.get(junction.getUniqueId())
 				.addNonCompliantSplitRatio(k, in_id, out_id, commodity, split);
 	}

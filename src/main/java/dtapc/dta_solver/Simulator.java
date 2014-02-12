@@ -259,8 +259,6 @@ public class Simulator {
 		assert (lwr_network.getSources() != null);
 		splits = IntertemporalOriginsSplitRatios.defaultPhysicalSplitRatios(
 				nb_steps, lwr_network.sources, alpha);
-		splits = IntertemporalOriginsSplitRatios.defaultPhysicalSplitRatios(
-				nb_steps, lwr_network.sources, alpha);
 		System.out.println("Done");
 	}
 
